@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Producto
-from django.contrib.auth.models import User # Importamos User para poder crear usuarios de prueba
+from django.contrib.auth.models import User 
 
 @admin.register(Producto)
 class ProductoAdmin(admin.ModelAdmin):
@@ -24,11 +24,11 @@ class ProductoAdmin(admin.ModelAdmin):
         Solo permite eliminar si el usuario es un superusuario.
         """
         # Si el usuario es un superusuario, se le permite eliminar.
-        # Esto cumple con el requisito de "solo el administrador pueda eliminar".
+       
         if request.user.is_superuser:
             return True
         # Para todos los demás usuarios (incluyendo Administradores y Gestores de Grupos),
-        # se respeta el permiso normal asignado por Django (que asumimos será False para eliminar).
+        
         return super().has_delete_permission(request, obj)
 
     def get_actions(self, request):

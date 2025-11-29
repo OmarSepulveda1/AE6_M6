@@ -35,22 +35,21 @@ def intentar_eliminar_producto(request, pk):
 
     if request.method == 'POST':
         # 2. Verificar si el usuario tiene permiso para eliminar (gestion.delete_producto)
-        # o si es un superusuario.
+       
         if request.user.has_perm('gestion.delete_producto') or request.user.is_superuser:
             # ACCESO CONCEDIDO: El usuario tiene permiso
             producto.delete()
-            # Usamos messages para notificar al usuario en el siguiente request
+         
             messages.success(request, f"Producto '{producto.nombre}' eliminado correctamente.")
-            # Redirigir al índice del admin (o a la página principal)
+            
             return redirect('/admin/gestion/producto/') 
         else:
             # ACCESO DENEGADO: El usuario NO tiene permiso de eliminación
-            # Forzamos un error 403 (Acceso Denegado) explícito.
+        
             raise PermissionDenied("No tienes permiso para eliminar este producto.")
 
     # 3. Mostrar la página de confirmación (Método GET)
-    # Nota: En Django real, usarías render(request, 'gestion/confirmar_eliminar.html', {'producto': producto})
-    # Aquí usamos un HttpResponse simple para no depender de templates.
+    
     return HttpResponse(f"""
         <div style="font-family: Arial, sans-serif; padding: 20px;">
             <h1 style="color: #333;">Confirmar Eliminación</h1>

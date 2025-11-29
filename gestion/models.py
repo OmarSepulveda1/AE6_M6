@@ -2,8 +2,7 @@ from django.db import models
 
 class Producto(models.Model):
     """
-    Modelo para representar un producto en el inventario.
-    Incluye campos básicos requeridos.
+    Modelo para producto en el inventario.
     """
     nombre = models.CharField(max_length=200, verbose_name="Nombre del Producto")
     descripcion = models.TextField(verbose_name="Descripción Detallada")
