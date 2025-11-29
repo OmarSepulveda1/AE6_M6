@@ -1,0 +1,28 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}Lista de Productos{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="my-4">Lista de Productos</h1>
+    <div class="row">
+      {% if productos %}
+        {% for producto in productos %}
+          <div class="col-md-4">
+            <div class="card mb-4">
+              <div class="card-body">
+                <h5 class="card-title">{{ producto.nombre }}</h5>
+                <p class="card-text">{{ producto.descripcion }}</p>
+                <p class="card-text"><strong>Precio:</strong> ${{ producto.precio }}</p>
+                <p class="card-text"><strong>Stock:</strong> {{ producto.stock }}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No hay productos disponibles.</p>
+      {% endif %}
+    </div>
+    <a href="{% url 'landing' %}" class="btn btn-primary">Volver al inicio</a>
+  </div>
+{% endblock %}
